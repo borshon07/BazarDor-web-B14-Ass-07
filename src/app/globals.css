@@ -1,8 +1,36 @@
 @import "tailwindcss";
-@import "@heroui/styles"; 
+@import "@heroui/styles";
 
 :root {
-  --background: #ffffff;
-  --foreground: #171717;
+  --base-100: #fafcfa;
+  --base-200: #f0f5f0;
+  --base-300: #e1e8e1;
+  --base-content: #1d271f;
+
+  --primary: #05893e;
+  --primary-content: #f3fbf4;
+
+  --error: #d03739;
+  --success: #05893e;
 }
 
+@theme inline {
+  --color-base-100: var(--base-100);
+  --color-base-200: var(--base-200);
+  --color-base-300: var(--base-300);
+  --color-base-content: var(--base-content);
+
+  --color-primary: var(--primary);
+  --color-primary-content: var(--primary-content);
+
+  --color-error: var(--error);
+  --color-success: var(--success);
+
+  --font-sans: var(--font-hind), system-ui, sans-serif;
+}
+
+body {
+  background: var(--base-100);
+  color: var(--base-content);
+  font-family: var(--font-hind), system-ui, sans-serif;
+}
