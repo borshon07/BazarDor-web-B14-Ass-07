@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Assite from "@/app/Assite/bazar-hero.png";
 import { buttonVariants } from "@heroui/react";
 import TodayDate from "@/app/Components/ui/TodayDate";
 
@@ -14,9 +15,8 @@ export default function Hero() {
           </h1>
 
           <p className="mt-1 text-base leading-6 text-base-content">
-            চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম —
-            বাজারভিত্তিক বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন
-            এক জায়গায়।
+            চাল, ডাল, তেল, সবজি, মাছ, মাংস, ডিম ও মসলার দাম — বাজারভিত্তিক
+            বিস্তারিত, গড়, সর্বনিম্ন-সর্বাধিক এবং দামের পরিবর্তন এক জায়গায়।
           </p>
 
           <a
@@ -31,8 +31,8 @@ export default function Hero() {
         </div>
 
         <Image
-          src="/bazar-hero.svg"
-          alt=""
+          src={Assite}
+          alt="আজকের বাজারের পণ্য"
           width={315}
           height={263}
           priority
