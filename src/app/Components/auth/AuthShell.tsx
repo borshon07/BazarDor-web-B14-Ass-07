@@ -5,9 +5,17 @@ type Props = {
   title: string;
   subtitle: string;
   children: React.ReactNode;
+  backHref?: string;
+  backLabel?: string;
 };
 
-export default function AuthShell({ title, subtitle, children }: Props) {
+export default function AuthShell({
+  title,
+  subtitle,
+  children,
+  backHref = "/",
+  backLabel = "← হোম পেজে ফিরে যান",
+}: Props) {
   return (
     <div className="mx-auto flex w-full max-w-[448px] flex-col gap-6 px-4 py-10">
       <div className="flex flex-col items-center gap-1 text-center text-base-content">
@@ -20,10 +28,10 @@ export default function AuthShell({ title, subtitle, children }: Props) {
       </Card>
 
       <Link
-        href="/"
+        href={backHref}
         className="text-center text-sm leading-5 text-base-content hover:underline"
       >
-        ← হোম পেজে ফিরে যান
+        {backLabel}
       </Link>
     </div>
   );

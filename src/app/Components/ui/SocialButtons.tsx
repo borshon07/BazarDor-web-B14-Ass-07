@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { Button } from "@heroui/react";
+import toast from "react-hot-toast";
 import { authClient } from "@/lib/auth-client";
 
 type Provider = "google" | "github";
@@ -13,9 +14,14 @@ export default function SocialButtons() {
     setPending(provider);
     const { error } = await authClient.signIn.social({
       provider,
-      callbackURL: "/",
+      callbackURL: "/?auth=success",
     });
-    if (error) setPending(null);
+
+    if (error) {
+      console.error("Social sign-in error:", error);
+      setPending(null);
+      toast.error(error.message || "সাইন ইন করা যায়নি, আবার চেষ্টা করুন।");
+    }
   }
 
   const btnClass =

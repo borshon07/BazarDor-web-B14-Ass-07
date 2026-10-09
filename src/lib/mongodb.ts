@@ -4,11 +4,12 @@ const uri = process.env.MONGODB_URI ?? process.env.MONGODB_URL;
 
 if (!uri) {
   throw new Error(
-    ".env e MONGODB_URI (ba MONGODB_URL) nei, connection string boshao",
+    "Missing MONGODB_URI (or MONGODB_URL) in .env. Please add your MongoDB connection string.",
   );
 }
 
-// dev e hot reload er shomoy bar bar notun connection na khular jonno
+// Reuse the client across hot reloads in development
+// to avoid opening a new connection on every reload.
 const globalForMongo = globalThis as unknown as {
   _mongoClient?: MongoClient;
 };

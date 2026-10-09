@@ -1,12 +1,13 @@
 import { betterAuth } from "better-auth";
-import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { mongodbAdapter } from "@better-auth/mongo-adapter";
+import { nextCookies } from "better-auth/next-js";
 import { client, db } from "./mongodb";
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, { client }),
   emailAndPassword: {
     enabled: true,
-     autoSignIn: false,
+    autoSignIn: false,
   },
   socialProviders: {
     google: {
@@ -18,4 +19,5 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     },
   },
+  plugins: [nextCookies()],
 });

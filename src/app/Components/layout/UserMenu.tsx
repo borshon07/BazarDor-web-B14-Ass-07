@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
+import toast from "react-hot-toast";
 
 export default function UserMenu() {
   const router = useRouter();
@@ -40,13 +41,13 @@ export default function UserMenu() {
       <div className="flex items-center gap-2">
         <Link
           href="/signin"
-          className="flex h-10 items-center rounded-lg border border-base-300 px-[17px] text-sm font-semibold text-base-content transition-colors hover:bg-base-200"
+          className="flex h-9 items-center rounded-lg border border-base-300 px-3 text-xs font-semibold text-base-content transition-colors hover:bg-base-200 sm:h-10 sm:px-[17px] sm:text-sm"
         >
           সাইন ইন
         </Link>
         <Link
           href="/signup"
-          className="flex h-10 items-center rounded-lg border border-primary-strong bg-primary px-[17px] text-sm font-semibold text-primary-content shadow-[0_3px_1px_rgba(5,137,62,0.3)]"
+          className="flex h-9 items-center rounded-lg border border-primary-strong bg-primary px-3 text-xs font-semibold text-primary-content shadow-[0_3px_1px_rgba(5,137,62,0.3)] sm:h-10 sm:px-[17px] sm:text-sm"
         >
           সাইন আপ
         </Link>
@@ -57,11 +58,18 @@ export default function UserMenu() {
   const { name, email, image } = session.user;
 
   async function handleSignOut() {
-    await authClient.signOut();
-    setOpen(false);
-    router.push("/");
-    router.refresh();
+  const { error } = await authClient.signOut();
+
+  if (error) {
+    toast.error("সাইন আউট করা যায়নি, আবার চেষ্টা করুন।");
+    return;
   }
+
+  setOpen(false);
+  toast.success("সাইন আউট হয়েছে।");
+  router.push("/");
+  router.refresh();
+}
 
   return (
     <div ref={ref} className="relative">
@@ -70,7 +78,7 @@ export default function UserMenu() {
         aria-haspopup="menu"
         aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex h-10 items-center gap-2 rounded-lg px-[17px] transition-colors hover:bg-base-200"
+        className="flex h-10 items-center gap-2 rounded-lg px-2 transition-colors hover:bg-base-200 sm:px-[17px]"
       >
         <span className="flex size-9 items-center justify-center overflow-hidden rounded-[10.5px] bg-primary text-sm font-semibold text-primary-content">
           {image ? (
@@ -80,7 +88,7 @@ export default function UserMenu() {
             name?.charAt(0).toUpperCase()
           )}
         </span>
-        <span className="max-w-32 truncate text-sm font-medium text-base-content">
+        <span className="hidden max-w-32 truncate text-sm font-medium text-base-content sm:block">
           {name}
         </span>
         <span className="text-xs opacity-60">▾</span>

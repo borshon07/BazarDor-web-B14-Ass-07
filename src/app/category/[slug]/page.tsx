@@ -1,7 +1,7 @@
 import { notFound } from "next/navigation";
 import { getCategory, getProducts } from "@/lib/api";
 import { toBn } from "@/lib/format";
-import CategoryProducts from "@/app/Components/product/CategoryProducts";
+import ProductGrid from "@/app/Components/product/ProductGrid";
 import EmptyState from "@/app/Components/ui/EmptyState";
 
 export default async function CategoryPage({
@@ -40,7 +40,7 @@ export default async function CategoryPage({
           description="এখনো এই ক্যাটাগরিতে কোনো পণ্যের দাম যোগ করা হয়নি।"
         />
       ) : (
-        <CategoryProducts products={products} />
+        <ProductGrid products={products} />
       )}
     </div>
   );

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
+import { Suspense } from "react";
 import { Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
-import Header from "@/app/Components/layout/Header";
+import AuthNotice from "@/app/Components/auth/AuthNotice";
 import Footer from "@/app/Components/layout/Footer";
-import Ticker from "./Components/layout/Ticker";
+import Header from "@/app/Components/layout/Header";
+import Ticker from "@/app/Components/layout/Ticker";
 import Toaster from "@/app/Components/ui/Toaster";
 
 const noto = Noto_Sans_Bengali({
@@ -22,13 +24,18 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-   <html lang="bn" className={noto.variable} data-scroll-behavior="smooth">
-      <body className="min-h-screen flex flex-col">
+    <html lang="bn" className={noto.variable}>
+      <body className="flex min-h-screen flex-col">
         <Toaster />
-        <Header />  
+        <Suspense fallback={null}>
+          <AuthNotice />
+        </Suspense>
+
+        <Header />
         <Ticker />
 
         <main className="flex-1">{children}</main>
+
         <Footer />
       </body>
     </html>

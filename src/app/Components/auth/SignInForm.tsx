@@ -3,10 +3,11 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button, Form, toast } from "@heroui/react";
 import FormField from "@/app/Components/ui/Formfield";
 import SocialButtons from "@/app/Components/ui/SocialButtons";
 import { authClient } from "@/lib/auth-client";
+import { Button, Form } from "@heroui/react";
+import toast from "react-hot-toast";
 
 export default function SignInForm() {
   const router = useRouter();
@@ -20,7 +21,7 @@ export default function SignInForm() {
     const password = String(data.get("password") ?? "");
 
     if (!email || !password) {
-      toast.danger("ইমেইল ও পাসওয়ার্ড দিন।");
+      toast.error("ইমেইল ও পাসওয়ার্ড দিন।");
       return;
     }
 
@@ -29,7 +30,7 @@ export default function SignInForm() {
     setPending(false);
 
     if (error) {
-      toast.danger("ইমেইল বা পাসওয়ার্ড ভুল।");
+      toast.error("ইমেইল বা পাসওয়ার্ড ভুল।");
       return;
     }
 

@@ -5,14 +5,15 @@ import { getSessionCookie } from "better-auth/cookies";
 export function proxy(request: NextRequest) {
   const sessionCookie = getSessionCookie(request);
 
-  // login kora na thakle sign in page e pathao
   if (!sessionCookie) {
-    return NextResponse.redirect(new URL("/signin", request.url));
+    const url = new URL("/signin", request.url);
+    url.searchParams.set("reason", "login-required");
+    return NextResponse.redirect(url);
   }
 
   return NextResponse.next();
 }
 
 export const config = {
-  matcher: ["/profile", "/product/:path*"],
+  matcher: ["/profile/:path*", "/product/:path*"],
 };

@@ -5,7 +5,7 @@ import TodayDate from "@/app/Components/ui/TodayDate";
 export default function Hero() {
   return (
     <section className="rounded-3xl border border-base-300 bg-base-100">
-      <div className="flex items-center justify-between gap-6 px-4 py-10">
+      <div className="flex flex-col items-center gap-8 px-4 py-8 md:flex-row md:justify-between md:py-10">
         <div className="flex max-w-xl flex-col items-start gap-2">
           <TodayDate className="rounded-[14px] bg-primary/10 px-3 py-1 text-sm font-medium leading-5 text-primary" />
 
@@ -23,7 +23,7 @@ export default function Hero() {
             href="#সব-পণ্য"
             className={buttonVariants({
               className:
-                "mt-3 h-10 rounded-lg border border-[#047f39] bg-primary px-[17px] text-sm font-semibold text-primary-content shadow-[0_3px_1px_rgba(5,137,62,0.3)]",
+                "mt-3 h-9 rounded-lg border border-[#047f39] bg-primary px-4 text-xs font-semibold text-primary-content shadow-[0_3px_1px_rgba(5,137,62,0.3)] sm:h-10 sm:px-[17px] sm:text-sm",
             })}
           >
             সব পণ্য দেখুন
@@ -36,7 +36,7 @@ export default function Hero() {
           width={315}
           height={263}
           priority
-          className="hidden shrink-0 md:block"
+          className="h-auto w-56 shrink-0 sm:w-64 md:w-[315px]"
         />
       </div>
     </section>
