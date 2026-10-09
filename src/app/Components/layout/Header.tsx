@@ -1,4 +1,5 @@
 import { Suspense } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { getCategories } from "@/lib/api";
 import type { Category } from "@/types/product";
@@ -34,9 +35,14 @@ export default async function Header() {
     <header className="border-b border-base-300 bg-base-100">
       <div className="mx-auto flex max-w-6xl items-center justify-between gap-3 px-4 py-3">
         <Link href="/" className="flex min-w-0 items-center gap-2">
-          <span className="flex size-9 shrink-0 items-center justify-center rounded-xl bg-primary text-base text-primary-content sm:size-10 sm:text-[18px]">
-            🛒
-          </span>
+          <Image
+            src="/assite/logo-icon.png"
+            alt="বাজার দর লোগো"
+            width={40}
+            height={40}
+            priority
+            className="size-9 shrink-0 rounded-xl object-contain sm:size-10"
+          />
           <span className="flex min-w-0 flex-col">
             <span className="truncate text-lg font-bold leading-7 tracking-[-0.5px] text-base-content sm:text-[20px]">
               বাজার দর

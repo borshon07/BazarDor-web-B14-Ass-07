@@ -48,7 +48,7 @@ export default function SignInForm() {
         type="submit"
         fullWidth
         isPending={pending}
-        className="h-10 rounded-lg border border-[#047f39] bg-primary text-sm font-semibold text-primary-content shadow-[0_3px_1px_rgba(5,137,62,0.3)]"
+        className="h-9 rounded-lg border border-[#047f39] bg-primary text-xs font-semibold text-primary-content shadow-[0_3px_1px_rgba(5,137,62,0.3)] sm:h-10 sm:text-sm"
       >
         সাইন ইন
       </Button>

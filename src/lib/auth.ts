@@ -1,7 +1,25 @@
 import { betterAuth } from "better-auth";
-import { mongodbAdapter } from "@better-auth/mongo-adapter";
-import { nextCookies } from "better-auth/next-js";
-import { client, db } from "./mongodb";
+import { mongodbAdapter } from "better-auth/adapters/mongodb";
+import { MongoClient } from "mongodb";
+
+const uri = process.env.MONGODB_URI ?? process.env.MONGODB_URL;
+
+if (!uri) {
+  throw new Error("MONGODB_URI .env e nei, connection string boshao");
+}
+
+// dev e hot reload er shomoy bar bar notun connection na khular jonno
+const globalForMongo = globalThis as unknown as {
+  _mongoClient?: MongoClient;
+};
+
+const client = globalForMongo._mongoClient ?? new MongoClient(uri);
+
+if (process.env.NODE_ENV !== "production") {
+  globalForMongo._mongoClient = client;
+}
+
+const db = client.db();
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, { client }),
@@ -19,5 +37,4 @@ export const auth = betterAuth({
       clientSecret: process.env.GITHUB_CLIENT_SECRET as string,
     },
   },
-  cookies: nextCookies(),
 });

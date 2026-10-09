@@ -2,7 +2,7 @@ import type { ChangeDir } from "./format";
 
 // true  = Figma: dam barle laal ▲, komle sobuj ▼
 // false = requirement text: dam barle sobuj ▲, komle laal ▼
-const UP_IS_RED = true;
+const UP_IS_RED = false;
 
 export function changeColor(dir: ChangeDir): string {
   if (dir === "flat") return "text-base-content/60";

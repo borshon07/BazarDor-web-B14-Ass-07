@@ -1,5 +1,4 @@
 import Image from "next/image";
-import Assite from "@/app/Assite/bazar-hero.png";
 import { buttonVariants } from "@heroui/react";
 import TodayDate from "@/app/Components/ui/TodayDate";
 
@@ -31,7 +30,7 @@ export default function Hero() {
         </div>
 
         <Image
-          src={Assite}
+          src="/assite/bazar-hero.png"
           alt="আজকের বাজারের পণ্য"
           width={315}
           height={263}

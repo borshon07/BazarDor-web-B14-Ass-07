@@ -24,11 +24,13 @@ export function bnDate(date: Date = new Date()): string {
 
 export type ChangeDir = "up" | "down" | "flat";
 
-// dam barse / komse / ager moto, ar koto %
+// dam barse / komse / ager moto, ar koto % (pct shobshomoy positive)
 export function getChange(product: Product): { dir: ChangeDir; pct: number } {
   if (product.change) {
-    const { dir, pct } = product.change;
-    return pct === 0 ? { dir: "flat", pct: 0 } : { dir, pct };
+    const pct = Math.abs(product.change.pct);
+    return pct === 0
+      ? { dir: "flat", pct: 0 }
+      : { dir: product.change.dir, pct };
   }
 
   const diff = product.today - product.yesterday;
