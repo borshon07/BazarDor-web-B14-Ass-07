@@ -20,7 +20,7 @@ export default async function Home() {
       <PriceMoverSection title="আজ দাম বেড়েছে" dir="up" products={movers("up")} />
       <PriceMoverSection title="আজ দাম কমেছে" dir="down" products={movers("down")} />
 
-      <section id="products" className="scroll-mt-6">
+      <section id="সব-পণ্য" className="scroll-mt-6">
         <h2 className="text-xl font-bold leading-7 text-base-content">
           সব পণ্য
         </h2>

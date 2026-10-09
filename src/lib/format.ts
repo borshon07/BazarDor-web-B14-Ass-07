@@ -2,12 +2,16 @@ import type { Product } from "@/types/product";
 
 const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
 
-// 148 -> "১৪৮"
+// 148 -> "১৪৮" (comma chara, pct er jonno)
 export function toBn(value: number | string): string {
   return String(value).replace(/\d/g, (d) => bnDigits[Number(d)]);
 }
 
-// ajker date, Bangla te
+// 1850 -> "১,৮৫০" (dam er jonno)
+export function bnNumber(value: number): string {
+  return new Intl.NumberFormat("bn-BD").format(value);
+}
+
 export function bnDate(date: Date = new Date()): string {
   return new Intl.DateTimeFormat("bn-BD", {
     weekday: "long",
@@ -18,28 +22,38 @@ export function bnDate(date: Date = new Date()): string {
   }).format(date);
 }
 
-// dam barse naki komse, koto %
-export function getChange(product: Product): {
-  dir: "up" | "down";
-  pct: number;
-} {
-  if (product.change) return product.change;
+export type ChangeDir = "up" | "down" | "flat";
+
+// dam barse / komse / ager moto, ar koto %
+export function getChange(product: Product): { dir: ChangeDir; pct: number } {
+  if (product.change) {
+    const { dir, pct } = product.change;
+    return pct === 0 ? { dir: "flat", pct: 0 } : { dir, pct };
+  }
 
   const diff = product.today - product.yesterday;
-  const pct = product.yesterday
-    ? Math.round(Math.abs((diff / product.yesterday) * 100) * 10) / 10
-    : 0;
+  if (diff === 0 || !product.yesterday) return { dir: "flat", pct: 0 };
 
-  return { dir: diff >= 0 ? "up" : "down", pct };
+  const pct =
+    Math.round(Math.abs((diff / product.yesterday) * 100) * 10) / 10;
+  return { dir: diff > 0 ? "up" : "down", pct };
 }
 
 const units: Record<string, string> = {
   kg: "কেজি",
-  dozen: "ডজন",
-  piece: "পিস",
+  gram: "গ্রাম",
+  g: "গ্রাম",
   litre: "লিটার",
   liter: "লিটার",
-  gram: "গ্রাম",
+  ltr: "লিটার",
+  l: "লিটার",
+  dozen: "ডজন",
+  dzn: "ডজন",
+  doz: "ডজন",
+  piece: "পিস",
+  pcs: "পিস",
+  pc: "পিস",
+  hali: "হালি",
 };
 
 export function unitBn(unit: string): string {

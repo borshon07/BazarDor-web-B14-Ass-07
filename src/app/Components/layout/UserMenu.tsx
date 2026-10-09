@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { authClient } from "@/lib/auth-client";
@@ -9,6 +9,27 @@ export default function UserMenu() {
   const router = useRouter();
   const { data: session, isPending } = authClient.useSession();
   const [open, setOpen] = useState(false);
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    if (!open) return;
+
+    function onMouseDown(e: MouseEvent) {
+      if (ref.current && !ref.current.contains(e.target as Node)) {
+        setOpen(false);
+      }
+    }
+    function onKeyDown(e: KeyboardEvent) {
+      if (e.key === "Escape") setOpen(false);
+    }
+
+    document.addEventListener("mousedown", onMouseDown);
+    document.addEventListener("keydown", onKeyDown);
+    return () => {
+      document.removeEventListener("mousedown", onMouseDown);
+      document.removeEventListener("keydown", onKeyDown);
+    };
+  }, [open]);
 
   if (isPending) {
     return <div className="h-10 w-28 animate-pulse rounded-lg bg-base-200" />;
@@ -16,16 +37,24 @@ export default function UserMenu() {
 
   if (!session) {
     return (
-      <Link
-        href="/signin"
-        className="flex h-10 items-center rounded-lg bg-primary px-4 text-sm font-medium text-primary-content"
-      >
-        সাইন ইন
-      </Link>
+      <div className="flex items-center gap-2">
+        <Link
+          href="/signin"
+          className="flex h-10 items-center rounded-lg border border-base-300 px-[17px] text-sm font-semibold text-base-content transition-colors hover:bg-base-200"
+        >
+          সাইন ইন
+        </Link>
+        <Link
+          href="/signup"
+          className="flex h-10 items-center rounded-lg border border-primary-strong bg-primary px-[17px] text-sm font-semibold text-primary-content shadow-[0_3px_1px_rgba(5,137,62,0.3)]"
+        >
+          সাইন আপ
+        </Link>
+      </div>
     );
   }
 
-  const { name, image } = session.user;
+  const { name, email, image } = session.user;
 
   async function handleSignOut() {
     await authClient.signOut();
@@ -35,10 +64,13 @@ export default function UserMenu() {
   }
 
   return (
-    <div className="relative">
+    <div ref={ref} className="relative">
       <button
+        type="button"
+        aria-haspopup="menu"
+        aria-expanded={open}
         onClick={() => setOpen((v) => !v)}
-        className="flex h-10 items-center gap-2 rounded-lg px-[17px] hover:bg-base-200"
+        className="flex h-10 items-center gap-2 rounded-lg px-[17px] transition-colors hover:bg-base-200"
       >
         <span className="flex size-9 items-center justify-center overflow-hidden rounded-[10.5px] bg-primary text-sm font-semibold text-primary-content">
           {image ? (
@@ -48,24 +80,42 @@ export default function UserMenu() {
             name?.charAt(0).toUpperCase()
           )}
         </span>
-        <span className="text-sm font-medium text-base-content">{name}</span>
+        <span className="max-w-32 truncate text-sm font-medium text-base-content">
+          {name}
+        </span>
         <span className="text-xs opacity-60">▾</span>
       </button>
 
       {open && (
-        <div className="absolute right-0 z-20 mt-2 w-44 rounded-xl border border-base-300 bg-base-100 p-1 shadow-md">
+        <div
+          role="menu"
+          className="absolute right-0 top-full z-30 mt-2 w-64 rounded-2xl border border-base-300 bg-base-100 p-[9px] shadow-lg"
+        >
+          <div className="flex flex-col overflow-hidden px-3 py-2 text-base-content">
+            <span className="truncate text-sm font-semibold leading-[21px]">
+              {name}
+            </span>
+            <span className="truncate text-xs leading-4 opacity-70">
+              {email}
+            </span>
+          </div>
+
           <Link
             href="/profile"
+            role="menuitem"
             onClick={() => setOpen(false)}
-            className="block rounded-lg px-3 py-2 text-sm hover:bg-base-200"
+            className="flex h-[33px] items-center rounded-lg px-3 text-sm leading-[21px] text-base-content transition-colors hover:bg-base-200"
           >
-            প্রোফাইল
+            👤 আমার প্রোফাইল
           </Link>
+
           <button
+            type="button"
+            role="menuitem"
             onClick={handleSignOut}
-            className="block w-full rounded-lg px-3 py-2 text-left text-sm text-error hover:bg-base-200"
+            className="flex h-[33px] w-full items-center rounded-lg px-3 text-left text-sm leading-[21px] text-error transition-colors hover:bg-base-200"
           >
-            সাইন আউট
+            ↩ সাইন আউট
           </button>
         </div>
       )}

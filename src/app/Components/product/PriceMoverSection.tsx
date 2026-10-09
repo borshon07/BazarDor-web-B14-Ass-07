@@ -1,3 +1,4 @@
+import { changeColor, changeSymbol } from "@/lib/change";
 import ProductCard from "./ProductCard";
 import type { Product } from "@/types/product";
 
@@ -13,12 +14,8 @@ export default function PriceMoverSection({ title, dir, products }: Props) {
   return (
     <section className="flex flex-col gap-3">
       <div className="flex items-center gap-2">
-        <span
-          className={`text-base leading-6 ${
-            dir === "up" ? "text-error" : "text-success"
-          }`}
-        >
-          {dir === "up" ? "▲" : "▼"}
+        <span className={`text-base leading-6 ${changeColor(dir)}`}>
+          {changeSymbol(dir)}
         </span>
         <h2 className="text-xl font-bold leading-7 text-base-content">
           {title}

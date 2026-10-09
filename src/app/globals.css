@@ -8,10 +8,12 @@
   --base-content: #1d271f;
 
   --primary: #05893e;
+  --primary-strong: #047f39;
+  --primary-stronger: #047c37;
   --primary-content: #f3fbf4;
 
   --error: #d03739;
-  --success: #05893e;
+  --success: #1a9951;
 }
 
 @theme inline {
@@ -21,6 +23,8 @@
   --color-base-content: var(--base-content);
 
   --color-primary: var(--primary);
+  --color-primary-strong: var(--primary-strong);
+  --color-primary-stronger: var(--primary-stronger);
   --color-primary-content: var(--primary-content);
 
   --color-error: var(--error);
@@ -32,5 +36,39 @@
 body {
   background: var(--base-100);
   color: var(--base-content);
-  font-family: var(--font-hind), system-ui, sans-serif;
+  font-family: var(--font-noto), system-ui, sans-serif;
+}
+
+/* Ticker (infinite marquee) */
+@keyframes ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+.ticker-track {
+  animation: ticker 90s linear infinite;
+}
+
+.ticker-track:hover {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track {
+    animation: none;
+  }
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
 }

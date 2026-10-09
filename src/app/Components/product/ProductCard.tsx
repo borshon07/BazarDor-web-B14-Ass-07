@@ -1,11 +1,11 @@
 import Link from "next/link";
 import { Card } from "@heroui/react";
-import { getChange, toBn, unitBn } from "@/lib/format";
+import { changeColor, changeSymbol } from "@/lib/change";
+import { bnNumber, getChange, toBn, unitBn } from "@/lib/format";
 import type { Product } from "@/types/product";
 
 export default function ProductCard({ product }: { product: Product }) {
   const { dir, pct } = getChange(product);
-  const isUp = dir === "up";
 
   return (
     <Link href={`/product/${product.id}`} className="block rounded-2xl">
@@ -30,18 +30,16 @@ export default function ProductCard({ product }: { product: Product }) {
               <span className="text-xs leading-4">আজকের দাম</span>
               <span className="leading-7">
                 <span className="text-xl font-bold">
-                  {toBn(product.today)}{" "}
+                  {bnNumber(product.today)}{" "}
                 </span>
                 <span className="text-sm font-medium">টাকা</span>
               </span>
             </div>
 
             <span
-              className={`flex items-center gap-1 rounded-xl bg-base-200 px-2 py-1 text-xs font-semibold leading-4 ${
-                isUp ? "text-error" : "text-success"
-              }`}
+              className={`flex items-center gap-1 rounded-xl bg-base-200 px-2 py-1 text-xs font-semibold leading-4 ${changeColor(dir)}`}
             >
-              <span>{isUp ? "▲" : "▼"}</span>
+              <span>{changeSymbol(dir)}</span>
               <span>{toBn(pct.toFixed(1))}%</span>
             </span>
           </div>

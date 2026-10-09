@@ -20,7 +20,7 @@ export default function Hero() {
           </p>
 
           <a
-            href="#products"
+            href="#সব-পণ্য"
             className={buttonVariants({
               className:
                 "mt-3 h-10 rounded-lg border border-[#047f39] bg-primary px-[17px] text-sm font-semibold text-primary-content shadow-[0_3px_1px_rgba(5,137,62,0.3)]",
