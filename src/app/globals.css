@@ -26,7 +26,7 @@
   --color-error: var(--error);
   --color-success: var(--success);
 
-  --font-sans: var(--font-hind), system-ui, sans-serif;
+  --font-sans: var(--font-noto), system-ui, sans-serif;
 }
 
 body {

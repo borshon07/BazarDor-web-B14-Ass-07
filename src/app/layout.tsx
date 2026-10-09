@@ -1,11 +1,11 @@
 import type { Metadata } from "next";
-import { Hind_Siliguri } from "next/font/google";
+import { Noto_Sans_Bengali } from "next/font/google";
 import "./globals.css";
-
-const hind = Hind_Siliguri({
+import Header from "@/app/Components/layout/Header";
+import Footer from "@/app/Components/layout/Footer";
+const noto = Noto_Sans_Bengali({
   subsets: ["bengali", "latin"],
-  weight: ["400", "500", "600", "700"],
-  variable: "--font-hind",
+  variable: "--font-noto",
 });
 
 export const metadata: Metadata = {
@@ -19,11 +19,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="bn" className={hind.variable}>
+    <html lang="bn" className={noto.variable}>
       <body className="min-h-screen flex flex-col">
-        {/* Header, Ticker pore ekhane boshbe */}
+        <Header />  
         <main className="flex-1">{children}</main>
-        {/* Footer pore ekhane boshbe */}
+        <Footer />
       </body>
     </html>
   );

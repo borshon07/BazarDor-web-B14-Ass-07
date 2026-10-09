@@ -1,6 +1,6 @@
 import type { Category, Product } from "@/types/product";
 
-const BASE = "https://api.abcz.workers.dev/api/bazardor";
+const BASE = process.env.BAZARDOR_API_URL ?? "https://api.abcz.workers.dev/api/bazardor";
 
 // API direct array dile ba { data: [...] } dile duto-i kaj korbe
 function toArray<T>(json: unknown): T[] {
