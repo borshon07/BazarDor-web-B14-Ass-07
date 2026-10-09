@@ -1,15 +1,13 @@
 import Image from "next/image";
 import { buttonVariants } from "@heroui/react";
-import { bnDate } from "@/lib/format";
+import TodayDate from "@/app/Components/ui/TodayDate";
 
 export default function Hero() {
   return (
     <section className="rounded-3xl border border-base-300 bg-base-100">
       <div className="flex items-center justify-between gap-6 px-4 py-10">
         <div className="flex max-w-xl flex-col items-start gap-2">
-          <span className="rounded-[14px] bg-primary/10 px-3 py-1 text-sm font-medium leading-5 text-primary">
-            {bnDate()}
-          </span>
+          <TodayDate className="rounded-[14px] bg-primary/10 px-3 py-1 text-sm font-medium leading-5 text-primary" />
 
           <h1 className="text-3xl font-bold leading-tight text-base-content md:text-4xl md:leading-[45px]">
             আজকের বাজারের দাম এক নজরে

@@ -1,6 +1,6 @@
 import Link from "next/link";
 import { getCategories } from "@/lib/api";
-import { bnDate } from "@/lib/format";
+import TodayDate from "@/app/Components/ui/TodayDate";
 import type { Category } from "@/types/product";
 import UserMenu from "./UserMenu";
 
@@ -23,9 +23,7 @@ export default async function Header() {
             <span className="text-[20px] font-bold leading-7 tracking-[-0.5px] text-base-content">
               বাজার দর
             </span>
-            <span className="text-xs leading-4 text-base-content">
-              {bnDate()}
-            </span>
+            <TodayDate className="text-xs leading-4 text-base-content" />
           </span>
         </Link>
 

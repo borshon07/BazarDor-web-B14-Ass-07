@@ -5,7 +5,7 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { Button, Form } from "@heroui/react";
 import FormField from "@/app/Components/ui/Formfield";
-import GoogleButton from "@/app/Components/ui/GoogleButton";
+import SocialButtons from "@/app/Components/ui/SocialButtons";
 import { authClient } from "@/lib/auth-client";
 
 export default function SignInForm() {
@@ -60,7 +60,8 @@ export default function SignInForm() {
         <span className="h-px flex-1 bg-base-300" />
       </div>
 
-      <GoogleButton />
+     
+      <SocialButtons />
 
       <p className="text-center text-sm leading-5 text-base-content">
         অ্যাকাউন্ট নেই?{" "}
