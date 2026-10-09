@@ -8,7 +8,7 @@ export default function ProductCard({ product }: { product: Product }) {
   const { dir, pct } = getChange(product);
 
   return (
-    <Link href={`/product/${product.id}`} className="block rounded-2xl">
+    <Link href={`/product/${product.slug}`} className="block rounded-2xl">
       <Card className="gap-0 rounded-2xl border border-base-300 bg-base-100 p-0 shadow-none transition-colors hover:bg-base-200/50">
         <Card.Content className="flex flex-col gap-3 p-4">
           <div className="flex items-start gap-3">

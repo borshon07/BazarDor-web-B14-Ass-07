@@ -3,33 +3,37 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button, Form } from "@heroui/react";
+import { Button, Form, toast } from "@heroui/react";
 import FormField from "@/app/Components/ui/Formfield";
 import SocialButtons from "@/app/Components/ui/SocialButtons";
 import { authClient } from "@/lib/auth-client";
 
 export default function SignInForm() {
   const router = useRouter();
-  const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError("");
 
     const data = new FormData(e.currentTarget);
     const email = String(data.get("email") ?? "").trim();
     const password = String(data.get("password") ?? "");
+
+    if (!email || !password) {
+      toast.danger("ইমেইল ও পাসওয়ার্ড দিন।");
+      return;
+    }
 
     setPending(true);
     const { error } = await authClient.signIn.email({ email, password });
     setPending(false);
 
     if (error) {
-      setError("ইমেইল বা পাসওয়ার্ড ভুল।");
+      toast.danger("ইমেইল বা পাসওয়ার্ড ভুল।");
       return;
     }
 
+    toast.success("সাইন ইন সফল হয়েছে।");
     router.push("/");
     router.refresh();
   }
@@ -38,12 +42,6 @@ export default function SignInForm() {
     <Form onSubmit={handleSubmit} className="flex flex-col gap-4">
       <FormField label="ইমেইল" name="email" type="email" placeholder="you@example.com" autoComplete="email" />
       <FormField label="পাসওয়ার্ড" name="password" type="password" placeholder="আপনার পাসওয়ার্ড" autoComplete="current-password" />
-
-      {error && (
-        <p role="alert" className="text-sm text-error">
-          {error}
-        </p>
-      )}
 
       <Button
         type="submit"
@@ -60,7 +58,6 @@ export default function SignInForm() {
         <span className="h-px flex-1 bg-base-300" />
       </div>
 
-     
       <SocialButtons />
 
       <p className="text-center text-sm leading-5 text-base-content">

@@ -4,6 +4,7 @@ import "./globals.css";
 import Header from "@/app/Components/layout/Header";
 import Footer from "@/app/Components/layout/Footer";
 import Ticker from "./Components/layout/Ticker";
+import Toaster from "@/app/Components/ui/Toaster";
 
 const noto = Noto_Sans_Bengali({
   subsets: ["bengali", "latin"],
@@ -23,6 +24,7 @@ export default function RootLayout({
   return (
    <html lang="bn" className={noto.variable} data-scroll-behavior="smooth">
       <body className="min-h-screen flex flex-col">
+        <Toaster />
         <Header />  
         <Ticker />
 

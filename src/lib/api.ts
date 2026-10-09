@@ -47,3 +47,12 @@ export async function getCategory(slug: string): Promise<Category | null> {
   if (!res.ok) throw new Error("Category load kora gelo na");
   return res.json();
 }
+
+// slug diye khuje, `markets` (bazar-wise dam) na thakle single endpoint theke ane
+export async function getProductBySlug(slug: string): Promise<Product | null> {
+  const list = await getProducts();
+  const found = list.find((p) => p.slug === slug);
+  if (!found) return null;
+  if (found.markets && found.markets.length > 0) return found;
+  return getProduct(String(found.id));
+}

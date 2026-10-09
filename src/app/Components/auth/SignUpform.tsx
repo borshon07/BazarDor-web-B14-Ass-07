@@ -3,19 +3,17 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button, Form } from "@heroui/react";
+import { Button, Form, toast } from "@heroui/react";
 import FormField from "@/app/Components/ui/Formfield";
 import SocialButtons from "@/app/Components/ui/SocialButtons";
 import { authClient } from "@/lib/auth-client";
 
 export default function SignUpForm() {
   const router = useRouter();
-  const [error, setError] = useState("");
   const [pending, setPending] = useState(false);
 
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
-    setError("");
 
     const data = new FormData(e.currentTarget);
     const name = String(data.get("name") ?? "").trim();
@@ -24,11 +22,11 @@ export default function SignUpForm() {
     const confirm = String(data.get("confirm") ?? "");
 
     if (password.length < 8) {
-      setError("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।");
+      toast.danger("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।");
       return;
     }
     if (password !== confirm) {
-      setError("দুটি পাসওয়ার্ড মিলছে না।");
+      toast.danger("দুটি পাসওয়ার্ড মিলছে না।");
       return;
     }
 
@@ -37,12 +35,12 @@ export default function SignUpForm() {
     setPending(false);
 
     if (error) {
-      setError(error.message ?? "অ্যাকাউন্ট তৈরি করা যায়নি।");
+      toast.danger(error.message ?? "অ্যাকাউন্ট তৈরি করা যায়নি।");
       return;
     }
 
-    router.push("/");
-    router.refresh();
+    toast.success("অ্যাকাউন্ট তৈরি হয়েছে। এখন সাইন ইন করুন।");
+    router.push("/signin");
   }
 
   return (
@@ -51,12 +49,6 @@ export default function SignUpForm() {
       <FormField label="ইমেইল" name="email" type="email" placeholder="you@example.com" autoComplete="email" />
       <FormField label="পাসওয়ার্ড" name="password" type="password" placeholder="কমপক্ষে ৮ অক্ষর" autoComplete="new-password" />
       <FormField label="পাসওয়ার্ড নিশ্চিত করুন" name="confirm" type="password" placeholder="আবার লিখুন" autoComplete="new-password" />
-
-      {error && (
-        <p role="alert" className="text-sm text-error">
-          {error}
-        </p>
-      )}
 
       <Button
         type="submit"
@@ -73,7 +65,6 @@ export default function SignUpForm() {
         <span className="h-px flex-1 bg-base-300" />
       </div>
 
-      
       <SocialButtons />
 
       <p className="text-center text-sm leading-5 text-base-content">
