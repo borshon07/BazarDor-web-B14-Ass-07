@@ -23,14 +23,6 @@ const db = client.db();
 
 export const auth = betterAuth({
   database: mongodbAdapter(db, { client }),
-
-  // je je URL theke sign in/up korte dibe
-  trustedOrigins: [
-    process.env.BETTER_AUTH_URL ?? "http://localhost:3000",
-    "http://localhost:3000",
-    "https://bazar-dor-web-b14-ass-07-by-borshon.vercel.app",
-  ],
-
   emailAndPassword: {
     enabled: true,
     autoSignIn: false,
