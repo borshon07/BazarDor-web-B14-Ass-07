@@ -6,6 +6,7 @@ import type { Category } from "@/types/product";
 import TodayDate from "@/app/Components/ui/TodayDate";
 import CategoryNav from "./CategoryNav";
 import UserMenu from "./UserMenu";
+import ThemeToggle from "@/app/Components/ui/ThemeToggle";
 
 // CategoryNav load howar age ei skeleton dekhabe
 function CategoryNavSkeleton() {
@@ -27,8 +28,7 @@ export default async function Header() {
   let categories: Category[] = [];
   try {
     categories = await getCategories();
-  } catch {
-  }
+  } catch {}
 
   return (
     <header className="border-b border-base-300 bg-base-100">
@@ -50,7 +50,8 @@ export default async function Header() {
           </span>
         </Link>
 
-        <div className="shrink-0">
+        <div className="flex shrink-0 items-center gap-2">
+          <ThemeToggle />
           <UserMenu />
         </div>
       </div>

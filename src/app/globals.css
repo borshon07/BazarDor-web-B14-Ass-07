@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "@heroui/styles";
+@custom-variant dark (&:is(.dark *));
 
 :root {
   --base-100: #fafcfa;
@@ -14,6 +15,24 @@
 
   --error: #d03739;
   --success: #1a9951;
+}
+
+/* Dark mode: shudhu token er value bodlay, component e hat dite hoy na */
+.dark {
+  color-scheme: dark;
+
+  --base-100: #0f1511;
+  --base-200: #172019;
+  --base-300: #263227;
+  --base-content: #e6efe7;
+
+  --primary: #12a054;
+  --primary-strong: #0e8f49;
+  --primary-stronger: #0c7d40;
+  --primary-content: #f3fbf4;
+
+  --error: #f0686a;
+  --success: #34c075;
 }
 
 @theme inline {

@@ -6,6 +6,7 @@ import AuthNotice from "@/app/Components/auth/AuthNotice";
 import Footer from "@/app/Components/layout/Footer";
 import Header from "@/app/Components/layout/Header";
 import Ticker from "@/app/Components/layout/Ticker";
+import ThemeProvider from "@/app/Components/ui/ThemeProvider";
 import Toaster from "@/app/Components/ui/Toaster";
 
 const noto = Noto_Sans_Bengali({
@@ -24,19 +25,21 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="bn" className={noto.variable}>
+    <html lang="bn" className={noto.variable} suppressHydrationWarning>
       <body className="flex min-h-screen flex-col">
-        <Toaster />
-        <Suspense fallback={null}>
-          <AuthNotice />
-        </Suspense>
+        <ThemeProvider>
+          <Toaster />
+          <Suspense fallback={null}>
+            <AuthNotice />
+          </Suspense>
 
-        <Header />
-        <Ticker />
+          <Header />
+          <Ticker />
 
-        <main className="flex-1">{children}</main>
+          <main className="flex-1">{children}</main>
 
-        <Footer />
+          <Footer />
+        </ThemeProvider>
       </body>
     </html>
   );
