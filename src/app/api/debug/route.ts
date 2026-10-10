@@ -20,7 +20,6 @@ export async function GET() {
 
   const afterAt = uri.split("@").pop() ?? "";
   const info = {
-    username: uri.replace(/^mongodb(\+srv)?:\/\//, "").split(":")[0],
     atSignCount: (uri.match(/@/g) ?? []).length,
     hostAndRest: afterAt,
     hasSpaceOrQuote: /[\s"']/.test(uri),
