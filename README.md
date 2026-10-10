@@ -5,7 +5,7 @@
 **আজকের বাজারের দাম এক নজরে**
 *Today's grocery market prices in Bangladesh, at a glance.*
 
-[![Live Demo](https://img.shields.io/badge/Live-Demo-05893e?style=for-the-badge&logo=vercel&logoColor=white)](https://bazar-dor-web-b14-ass-07-by-borshon.vercel.app/)
+[![Live Demo](https://img.shields.io/badge/Live-Demo-05893e?style=for-the-badge&logo=vercel&logoColor=white)](https://bazar-dor-web-b14-ass-07.vercel.app)
 [![GitHub Repo](https://img.shields.io/badge/GitHub-Repository-1d271f?style=for-the-badge&logo=github&logoColor=white)](https://github.com/borshon07/BazarDor-web-B14-Ass-07)
 
 ![Next.js](https://img.shields.io/badge/Next.js-16-000000?logo=nextdotjs&logoColor=white)
