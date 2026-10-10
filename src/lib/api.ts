@@ -1,7 +1,6 @@
 import type { Category, Product } from "@/types/product";
 
-const BASE = process.env.BAZARDOR_API_URL ?? "https://api.abcz.workers.dev/api/bazardor";
-
+const BASE = process.env.BAZARDOR_API_URL ?? "https://openapi.programming-hero.com/api/bazardor";
 
 function toArray<T>(json: unknown): T[] {
   if (Array.isArray(json)) return json as T[];
@@ -47,7 +46,6 @@ export async function getCategory(slug: string): Promise<Category | null> {
   if (!res.ok) throw new Error("Category load kora gelo na");
   return res.json();
 }
-
 
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   const list = await getProducts();

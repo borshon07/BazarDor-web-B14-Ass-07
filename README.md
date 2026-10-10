@@ -66,7 +66,7 @@ in one clean and responsive interface.
 | `/profile/update` | 🔒 Protected | Update name |
 
 Product and category data come from the BazarDor API:
-`https://api.abcz.workers.dev/api/bazardor`
+`https://openapi.programming-hero.com/api/bazardor`
 
 ## 🚀 Getting Started
 
