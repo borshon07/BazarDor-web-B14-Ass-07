@@ -28,7 +28,6 @@ export default async function Header() {
   try {
     categories = await getCategories();
   } catch {
-    // API fail korle o header jeno bhenge na pore
   }
 
   return (

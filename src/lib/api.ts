@@ -2,7 +2,7 @@ import type { Category, Product } from "@/types/product";
 
 const BASE = process.env.BAZARDOR_API_URL ?? "https://api.abcz.workers.dev/api/bazardor";
 
-// API direct array dile ba { data: [...] } dile duto-i kaj korbe
+
 function toArray<T>(json: unknown): T[] {
   if (Array.isArray(json)) return json as T[];
   if (json && typeof json === "object" && "data" in json) {
@@ -48,7 +48,7 @@ export async function getCategory(slug: string): Promise<Category | null> {
   return res.json();
 }
 
-// slug diye khuje, `markets` (bazar-wise dam) na thakle single endpoint theke ane
+
 export async function getProductBySlug(slug: string): Promise<Product | null> {
   const list = await getProducts();
   const found = list.find((p) => p.slug === slug);

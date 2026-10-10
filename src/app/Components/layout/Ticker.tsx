@@ -25,7 +25,6 @@ export default async function Ticker() {
   try {
     products = await getProducts();
   } catch {
-    // API fail korle ticker lukiye thakbe, page bhangbe na
   }
 
   if (products.length === 0) return null;

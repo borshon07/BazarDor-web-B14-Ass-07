@@ -8,7 +8,7 @@ if (!uri) {
   throw new Error("MONGODB_URI .env e nei, connection string boshao");
 }
 
-// dev e hot reload er shomoy bar bar notun connection na khular jonno
+
 const globalForMongo = globalThis as unknown as {
   _mongoClient?: MongoClient;
 };

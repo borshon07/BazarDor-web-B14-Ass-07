@@ -13,7 +13,6 @@ export default async function ProductPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  // proxy sudhu cookie dekhe, ekhane asol session check
   const session = await auth.api.getSession({ headers: await headers() });
   if (!session) redirect("/signin");
 
@@ -41,7 +40,7 @@ export default async function ProductPage({
 
   return (
     <div className="mx-auto flex max-w-[1152px] flex-col gap-6 px-4 pb-12 pt-6">
-      {/* Breadcrumb */}
+      
       <nav aria-label="breadcrumb" className="text-sm text-base-content">
         <ol className="flex flex-wrap items-center gap-2">
           <li>
@@ -58,7 +57,6 @@ export default async function ProductPage({
         </ol>
       </nav>
 
-      {/* Top summary */}
       <section className="flex flex-col gap-4 rounded-2xl border border-base-300 bg-base-100 p-[21px] md:flex-row md:items-center">
         <div className="flex size-20 shrink-0 items-center justify-center rounded-2xl bg-base-200 text-4xl leading-10">
           {product.image}
@@ -108,7 +106,6 @@ export default async function ProductPage({
         </div>
       </section>
 
-      {/* Summary + market table */}
       <section className="flex flex-col gap-6 rounded-2xl border border-base-300 bg-base-100 p-[21px] text-base-content">
         <div className="flex flex-col gap-3">
           <h2 className="text-xl font-bold leading-7">দামের সারসংক্ষেপ</h2>

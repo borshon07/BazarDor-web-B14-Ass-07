@@ -3,7 +3,8 @@
 import { useState } from "react";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
-import { Button, Form, toast } from "@heroui/react";
+import { Button, Form } from "@heroui/react";
+import toast from "react-hot-toast";
 import FormField from "@/app/Components/ui/Formfield";
 import SocialButtons from "@/app/Components/ui/SocialButtons";
 import { authClient } from "@/lib/auth-client";
@@ -22,11 +23,11 @@ export default function SignUpForm() {
     const confirm = String(data.get("confirm") ?? "");
 
     if (password.length < 8) {
-      toast.danger("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।");
+      toast.error("পাসওয়ার্ড কমপক্ষে ৮ অক্ষরের হতে হবে।");
       return;
     }
     if (password !== confirm) {
-      toast.danger("দুটি পাসওয়ার্ড মিলছে না।");
+      toast.error("দুটি পাসওয়ার্ড মিলছে না।");
       return;
     }
 
@@ -35,7 +36,7 @@ export default function SignUpForm() {
     setPending(false);
 
     if (error) {
-      toast.danger(error.message ?? "অ্যাকাউন্ট তৈরি করা যায়নি।");
+      toast.error(error.message ?? "অ্যাকাউন্ট তৈরি করা যায়নি।");
       return;
     }
 
@@ -45,7 +46,7 @@ export default function SignUpForm() {
 
   return (
     <Form onSubmit={handleSubmit} className="flex flex-col gap-4">
-      <FormField label="নাম" name="name" placeholder="যেমন: রহিম উদ্দিন" autoComplete="name" />
+      <FormField label="নাম" name="name" placeholder="যেমন: বর্ষণ রায়" autoComplete="name" />
       <FormField label="ইমেইল" name="email" type="email" placeholder="you@example.com" autoComplete="email" />
       <FormField label="পাসওয়ার্ড" name="password" type="password" placeholder="কমপক্ষে ৮ অক্ষর" autoComplete="new-password" />
       <FormField label="পাসওয়ার্ড নিশ্চিত করুন" name="confirm" type="password" placeholder="আবার লিখুন" autoComplete="new-password" />
