@@ -39,7 +39,8 @@ in one clean and responsive interface.
    Google or GitHub using Better Auth, plus a profile page where users can
    update their name.
 5. **📱 Smooth, responsive experience** – works on mobile, tablet and desktop,
-   with skeleton loaders, toast notifications and a friendly 404 page.
+   with a light / dark theme toggle, skeleton loaders, toast notifications and
+   a friendly 404 page.
 
 ## 🛠️ Technologies Used
 
@@ -51,6 +52,7 @@ in one clean and responsive interface.
 | **HeroUI v3** | Component library (Card, Button, Form, Input, Select) |
 | **Better Auth** | Email/password, Google and GitHub authentication |
 | **MongoDB (Atlas)** | User and session storage for Better Auth |
+| **next-themes** | Light / dark theme switching |
 | **react-hot-toast** | Toast notifications |
 | **Vercel** | Deployment |
 
@@ -65,16 +67,32 @@ in one clean and responsive interface.
 | `/profile` | 🔒 Protected | User information |
 | `/profile/update` | 🔒 Protected | Update name |
 
+Logged-out users who open a protected page are redirected to `/signin` with a
+toast message. Unknown routes show a custom 404 page.
+
+## 🌐 Data Source
+
 Product and category data come from the BazarDor API:
-`https://openapi.programming-hero.com/api/bazardor`
+
+```
+https://openapi.programming-hero.com/api/bazardor
+```
+
+| Endpoint | Purpose |
+|---|---|
+| `/categories` | All categories |
+| `/categories/[slug]` | One category |
+| `/products` | All products |
+| `/products?category=[slug]` | Products of one category |
+| `/products/[id]` | One product with bazar-wise prices |
 
 ## 🚀 Getting Started
 
 **1. Clone and install**
 
 ```bash
-git clone https://github.com/borshon07/BazarDor-web-B14-Ass-07
-cd bazardor-ass-07-app
+git clone https://github.com/borshon07/BazarDor-web-B14-Ass-07.git
+cd BazarDor-web-B14-Ass-07
 npm install
 ```
 
@@ -88,9 +106,12 @@ GOOGLE_CLIENT_ID=
 GOOGLE_CLIENT_SECRET=
 GITHUB_CLIENT_ID=
 GITHUB_CLIENT_SECRET=
+
+# optional (defaults to the official BazarDor API)
+BAZARDOR_API_URL=https://openapi.programming-hero.com/api/bazardor
 ```
 
-OAuth callback URLs:
+OAuth callback URLs (local):
 
 - Google: `http://localhost:3000/api/auth/callback/google`
 - GitHub: `http://localhost:3000/api/auth/callback/github`
@@ -103,9 +124,40 @@ npm run dev
 
 Open [http://localhost:3000](http://localhost:3000).
 
+## 📜 Scripts
+
+```bash
+npm run dev     # start the dev server
+npm run build   # production build
+npm run start   # run the production build
+npm run lint    # lint the code
+```
+
+## ☁️ Deployment
+
+The app is deployed on **Vercel**. Add the same environment variables in
+Vercel (**Settings → Environment Variables**), then redeploy:
+
+- `BETTER_AUTH_URL` must be the live site URL, with no trailing slash
+- Add the production callback URLs to the Google and GitHub OAuth apps:
+  - `https://bazar-dor-web-b14-ass-07.vercel.app/api/auth/callback/google`
+  - `https://bazar-dor-web-b14-ass-07.vercel.app/api/auth/callback/github`
+- Allow Vercel to reach MongoDB Atlas (**Network Access**)
+
+## 📝 Notes
+
+- Accounts with the same email are linked across email/password, Google and
+  GitHub sign in.
+- Email verification and forgot-password are intentionally not included.
+
 ## 👤 Author
 
 **Borshon Roy**
 
 ---
 
+<div align="center">
+
+Made with ❤️ for BazarDor
+
+</div>
