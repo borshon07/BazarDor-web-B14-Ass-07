@@ -13,12 +13,14 @@ export default async function ProductPage({
 }: {
   params: Promise<{ slug: string }>;
 }) {
-  const session = await auth.api.getSession({ headers: await headers() });
-  if (!session) redirect("/signin");
-
+  // 1. age product ache kina (na thakle 404)
   const { slug } = await params;
   const product = await getProductBySlug(slug);
   if (!product) notFound();
+
+  // 2. product ache, ebar login check (asol protection)
+  const session = await auth.api.getSession({ headers: await headers() });
+  if (!session) redirect("/signin?reason=login-required");
 
   const markets = product.markets ?? [];
   const { dir, pct } = getChange(product);
@@ -39,21 +41,27 @@ export default async function ProductPage({
     : product.today;
 
   return (
-    <div className="mx-auto flex max-w-[1152px] flex-col gap-6 px-4 pb-12 pt-6">
-      
+    <div className="mx-auto flex max-w-6xl flex-col gap-6 px-4 pb-12 pt-6">
       <nav aria-label="breadcrumb" className="text-sm text-base-content">
         <ol className="flex flex-wrap items-center gap-2">
           <li>
-            <Link href="/" className="hover:underline">হোম</Link>
+            <Link href="/" className="hover:underline">
+              হোম
+            </Link>
           </li>
           <li aria-hidden>›</li>
           <li>
-            <Link href={`/category/${product.category}`} className="hover:underline">
+            <Link
+              href={`/category/${product.category}`}
+              className="hover:underline"
+            >
               {product.categoryNameBn}
             </Link>
           </li>
           <li aria-hidden>›</li>
-          <li aria-current="page" className="font-medium">{product.nameBn}</li>
+          <li aria-current="page" className="font-medium">
+            {product.nameBn}
+          </li>
         </ol>
       </nav>
 
