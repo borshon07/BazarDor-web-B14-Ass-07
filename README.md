@@ -29,7 +29,7 @@ in one clean and responsive interface.
 
 ## ✨ Key Features
 
-1. **📈 Live price overview** – an infinite scrolling price ticker, plus the
+1. **📈 Daily price overview** – an infinite scrolling price ticker, plus the
    top 6 price risers and top 6 fallers of the day with ▲ / ▼ change badges.
 2. **🗂️ Category browsing and sorting** – browse products by category, and sort
    them by default order, price low to high, or price high to low.
@@ -87,6 +87,8 @@ https://openapi.programming-hero.com/api/bazardor
 | `/products/[id]` | One product with bazar-wise prices |
 
 ## 🚀 Getting Started
+
+> Requires Node.js 20.9 or newer.
 
 **1. Clone and install**
 

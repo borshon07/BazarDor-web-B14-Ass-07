@@ -2,12 +2,9 @@ import type { Product } from "@/types/product";
 
 const bnDigits = ["০", "১", "২", "৩", "৪", "৫", "৬", "৭", "৮", "৯"];
 
-// 148 -> "১৪৮" (comma chara, pct er jonno)
 export function toBn(value: number | string): string {
   return String(value).replace(/\d/g, (d) => bnDigits[Number(d)]);
 }
-
-// 1850 -> "১,৮৫০" (dam er jonno)
 export function bnNumber(value: number): string {
   return new Intl.NumberFormat("bn-BD").format(value);
 }
@@ -24,7 +21,7 @@ export function bnDate(date: Date = new Date()): string {
 
 export type ChangeDir = "up" | "down" | "flat";
 
-// dam barse / komse / ager moto, ar koto % (pct shobshomoy positive)
+
 export function getChange(product: Product): { dir: ChangeDir; pct: number } {
   if (product.change) {
     const pct = Math.abs(product.change.pct);
